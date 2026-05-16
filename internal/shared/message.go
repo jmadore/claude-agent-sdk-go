@@ -35,9 +35,6 @@ const (
 type AssistantMessageError string
 
 // AssistantMessageError constants for error type identification.
-// Matches Python SDK Literal values from types.py (AssistantMessageError):
-// authentication_failed, billing_error, rate_limit, invalid_request,
-// server_error, unknown.
 const (
 	AssistantMessageErrorAuthFailed     AssistantMessageError = "authentication_failed"
 	AssistantMessageErrorBilling        AssistantMessageError = "billing_error"
@@ -125,8 +122,8 @@ func (m *AssistantMessage) Type() string {
 }
 
 // GetParentToolUseID returns the parent tool use ID or empty string if nil.
-// Set by the CLI on assistant messages produced inside a subagent (Agent/Task tool)
-// to identify the orchestrator tool_use_id that spawned the subagent.
+// On assistant messages produced inside a subagent (Agent/Task tool), this
+// identifies the orchestrator tool_use_id that spawned the subagent.
 func (m *AssistantMessage) GetParentToolUseID() string {
 	if m.ParentToolUseID != nil {
 		return *m.ParentToolUseID
